@@ -1,0 +1,47 @@
+jdbc URL.     jdbc:mysql://localhost:3306/mysql   ?zeroDateTimeBehavior=convertToNull
+
+
+
+connection name.     jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull [root on Default schema]
+
+
+
+
+
+ String s=jTextField4.getText();
+       String sp=jTextField5.getText();
+       if (s.equals("") && sp.equals("")) {
+            JOptionPane.showMessageDialog(this, "Please enter data in mandatory fields");
+        }
+        else {
+            try {
+                Class.forName("java.sql.Driver");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mysql", "root", "toor");
+                Statement stmt = conn.createStatement();
+                String query;
+                String pid, fname, dob, gender, phone, phone2, email, address, reason; 
+                pid = jTextField1.getText();
+                fname = jTextField4.getText();
+                dob = jTextField5.getText();
+                gender = "Male";
+                if (jRadioButton2.isSelected() == true) {
+                    gender = "Female";
+                }
+                phone= jTextField6.getText();
+                phone2= jTextField2.getText();
+                email= jTextField3.getText();
+                address= jTextArea1.getText();
+                reason= jTextArea2.getText();
+               
+                
+                query = "insert into patient1 values(" + pid + ",\"" + fname + "\",\"" + dob + "\",\"" + gender + "\",\"" + phone + "\",\"" + phone2 + "\",\"" + email + "\",\"" + address + "\",\"" + reason + "\");";
+                stmt.executeUpdate(query);
+                JOptionPane.showMessageDialog(null,"Record inserted successfully!");
+            
+            stmt.close();
+            conn.close();
+            }
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Please Enter valid data!");
+            }
+       }
